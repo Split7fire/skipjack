@@ -17,30 +17,21 @@ modules:
       - source: system
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
-  - type: rpm-ostree
-    install:
-      - akmod-nvidia-580xx
-      - xorg-x11-drv-nvidia-580xx-libs
-      - xorg-x11-drv-nvidia-580xx-cuda
-
-  - type: script
-    snippets:
-      - rpm-ostree kargs --append-if-missing=rd.driver.blacklist=nouveau --append-if-missing=modprobe.blacklist=nouveau --append-if-missing=nvidia-drm.modeset=1
-
   - type: dnf
-  #   repos:
-  #     copr:
-  #       - atim/starship
-  #   install:
-  #     packages:
-  #       - micro
-  #       - starship
+      install:
+        - akmod-nvidia-580xx
+        - xorg-x11-drv-nvidia-580xx-cuda
     remove:
       packages:
         # example: removing firefox (in favor of the flatpak)
         # "firefox" is the main package, "firefox-langpacks" is a dependency
         - firefox
         - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
+
+  - type: script
+    snippets:
+      - rpm-ostree kargs --append-if-missing=rd.driver.blacklist=nouveau --append-if-missing=modprobe.blacklist=nouveau --append-if-missing=nvidia-drm.modeset=1
+
 
   - type: default-flatpaks
     configurations:
