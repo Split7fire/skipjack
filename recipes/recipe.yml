@@ -17,8 +17,13 @@ modules:
       - source: system
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
+  - type: rpm-ostree
+    repos:
+      - https://rpmfusion.org
+
   - type: dnf
-      install:
+    install:
+      packages:
         - akmod-nvidia-580xx
         - xorg-x11-drv-nvidia-580xx-cuda
     remove:
