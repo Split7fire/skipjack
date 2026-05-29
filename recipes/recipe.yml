@@ -27,7 +27,7 @@ modules:
     snippets:
       - rpm-ostree kargs --append-if-missing=rd.driver.blacklist=nouveau --append-if-missing=modprobe.blacklist=nouveau --append-if-missing=nvidia-drm.modeset=1
 
-  # - type: dnf
+  - type: dnf
   #   repos:
   #     copr:
   #       - atim/starship
